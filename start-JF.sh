@@ -1,0 +1,1 @@
+sudo docker run -d  --name jellyfin --mount type=bind,source=/home/ec2-user/config,target=/config  --mount type=bind,source=/home/ec2-user/cache,target=/cache  --mount type=bind,source=/home/ec2-user/media,target=/media  --restart=unless-stopped  -p 8096:8096 jellyfin/jellyfin
