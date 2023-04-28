@@ -35,7 +35,7 @@ resource "aws_ecs_cluster" "main" {
 }
 
 resource "aws_ecs_task_definition" "main" {
-  family                = "service"
+  family                = "jellyfin"
   cpu                      = 256
   memory                   = 512
   container_definitions = jsonencode([{
