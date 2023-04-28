@@ -32,43 +32,24 @@ resource "aws_security_group" "WordpressELBSG" {
     } 
 }
 
-resource "aws_security_group" "WordpressSGprivateinstances" {
-    
-    vpc_id = "${aws_vpc.WPvpc.id}"
-    
-    ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["10.0.0.0/16"]
-    }
-    ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["10.0.0.0/16"]
-    }
-    ingress {
-    description = "EFS mount target"
-    from_port   = 2049
-    to_port     = 2049
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
-    }
-        tags = {
-    Name = "WordpressSGprivateinstances"
-    } 
-    
-    // Terraform removes the default rule
-    egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-    }
-    
+resource "aws_security_group" "SG_ecs_tasks" {
+  name   = "${var.name}-sg-task"
+  vpc_id = "${aws_vpc.WPvpc.id}"
+ 
+  ingress {
+   protocol         = "tcp"
+   from_port        = var.container_port
+   to_port          = var.container_port
+   #change CIDR Range to ELB SG
+   cidr_blocks      = ["0.0.0.0/0"]
+  }
+ 
+  egress {
+   protocol         = "-1"
+   from_port        = 0
+   to_port          = 0
+   cidr_blocks      = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "allow_ec2_aurora" {

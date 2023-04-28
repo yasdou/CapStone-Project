@@ -2,6 +2,11 @@
 
 #If you want to change any of the variables go to the terraform.tfvars and specify anthing you want there
 
+variable "name"{
+    description = "Give a name that will be used to create all your ressources"
+    default = "jellyfin"
+}
+
 ##################
 #### Network #####
 ##################
@@ -29,7 +34,7 @@ variable "VPC_Name" {
 
 
 variable "ami_id" {
-    default = "ami-0df24e148fdb9f1d8"
+    default = "ami-0be4bf0879ccaadb3"
 }
 variable "instance_type" {
     default = "t2.micro"
@@ -165,4 +170,18 @@ variable "cidr_db_privat1" {
 variable "cidr_db_privat2" {
   description = "Specify CIDR Range for database private subnet 2"
   default = "10.0.6.0/24"
+}
+
+##################
+####### ECS ######
+##################
+
+variable "container_port" {
+  description = "Which Ports do you need to be exposed for your containers?"
+  default = 80
+}
+
+variable "container_image"{
+    description = "Docker image to be launched"
+    default = "nginx"
 }

@@ -1,8 +1,8 @@
 This file is automatically created after each terraform run. You can refer to this file in the future to check credentials.
-This file was created on 24.04.23.
-Bastion IP Address: 54.212.86.211
+This file was created on 28.04.23.
+Bastion IP Address: 34.218.59.24
 RDS Endpoint: {aws_rds_cluster.RDSWP.endpoint}
-ELB DNS: WPelb-2024625196.us-west-2.elb.amazonaws.com
+ELB DNS: WPelb-1556845777.us-west-2.elb.amazonaws.com
 DB Username: root
 DB Name: WPDatabase
 DB Password: <sensitive>

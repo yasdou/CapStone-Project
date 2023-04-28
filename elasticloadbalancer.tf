@@ -28,11 +28,16 @@ resource "aws_alb_target_group" "WPTG" {
 
 #create ALB listener for WP Servers
 resource "aws_alb_listener" "WPlistener" {
-  default_action {
-    target_group_arn = "${aws_alb_target_group.WPTG.arn}"
-    type = "forward"
-  }
+ # target_group_arn = "${aws_alb_target_group.WPTG.arn}"
   load_balancer_arn = "${aws_alb.WPelb.arn}"
   port = 80
   protocol = "HTTP"
+
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = var.container_port
+      status_code = "HTTP_301"
+    }
+   }
 }
