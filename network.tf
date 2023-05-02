@@ -1,4 +1,4 @@
-# Create a VPC
+# Create a VPC with Internet Gateway
 resource "aws_vpc" "WPvpc" {
     cidr_block = var.VPC_CIDR
     enable_dns_support = var.enable_dns_support
@@ -43,6 +43,7 @@ resource "aws_route_table_association" "public_rt_association_2" {
   route_table_id = aws_route_table.public_rt.id
 }
 
+#Create Elastic IP for NAT Gateway
 resource "aws_eip" "NAT_EIP" {
   vpc = true
 }

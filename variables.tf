@@ -34,13 +34,17 @@ variable "VPC_Name" {
 
 
 variable "ami_id" {
-    default = "ami-0be4bf0879ccaadb3"
+    default = "ami-0ac64ad8517166fb1"
 }
 variable "instance_type" {
-    default = "t2.micro"
+    default = "t3.micro"
 }
 variable "ami_key_pair_name" {
     default = "vockey"
+}
+variable "container_port" {
+  description = "Which Ports do you need to be exposed for your containers?"
+  default = 8096
 }
 
 ##################
@@ -170,18 +174,4 @@ variable "cidr_db_privat1" {
 variable "cidr_db_privat2" {
   description = "Specify CIDR Range for database private subnet 2"
   default = "10.0.6.0/24"
-}
-
-##################
-####### ECS ######
-##################
-
-variable "container_port" {
-  description = "Which Ports do you need to be exposed for your containers?"
-  default = 80
-}
-
-variable "container_image"{
-    description = "Docker image to be launched"
-    default = "nginx"
 }

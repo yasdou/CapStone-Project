@@ -8,8 +8,7 @@ resource "aws_launch_template" "launchtemplate" {
   iam_instance_profile {
     name = "LabInstanceProfile"
   }
-#  user_data = base64encode(templatefile("${path.module}/bash-init.sh", local.vars))
-  user_data            = base64encode("#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.main.name} >> /etc/ecs/ecs.config")
+  user_data = base64encode(templatefile("${path.module}/start-JF.sh", local.vars))
   monitoring {
     enabled = true
   }

@@ -62,8 +62,3 @@
 # cidr_public2 = ""
 # cidr_db_privat1 = ""
 # cidr_db_privat2 = ""
-
-##################
-####### ECS ######
-##################
-container_port = 8096

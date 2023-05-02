@@ -21,14 +21,14 @@ resource "aws_alb_target_group" "WPTG" {
     unhealthy_threshold = 2
     timeout = 2
     interval = 5
-    matcher = "200-399"  # has to be HTTP 404 or fails
+    matcher = "404"  # has to be HTTP 404 or fails
   }
 
 }
 
 #create ALB listener for WP Servers
 resource "aws_alb_listener" "WPlistener" {
- # target_group_arn = "${aws_alb_target_group.WPTG.arn}"
+  target_group_arn = "${aws_alb_target_group.WPTG.arn}"
   load_balancer_arn = "${aws_alb.WPelb.arn}"
   port = 80
   protocol = "HTTP"
