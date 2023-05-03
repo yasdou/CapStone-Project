@@ -185,7 +185,11 @@ variable "cidr_db_privat2" {
 ##################
 ### s3 Bucket ####
 ##################
-
+# you have to change these values manually in the backup.py script
 variable "s3bucketname" {
   default = "jellybelly"
+}
+
+variable "s3backupbucketname" {
+  default = "jellybellybackup"
 }

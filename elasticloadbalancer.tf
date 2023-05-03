@@ -8,7 +8,7 @@ resource "aws_alb" "ELBJellyfin" {
 
 resource "aws_alb_target_group" "TGJellyfin" {
   name     = "TGJellyfin"
-  port     = 80
+  port     = var.container_port
   protocol = "HTTP"
   vpc_id   = aws_vpc.JellyfinVPC.id
   
@@ -27,7 +27,7 @@ resource "aws_alb_target_group" "TGJellyfin" {
 }
 
 #create ALB listener for WP Servers
-resource "aws_alb_listener" "WPlistener" {
+resource "aws_alb_listener" "HTTPlistener" {
   load_balancer_arn = "${aws_alb.ELBJellyfin.arn}"
   port = 80
   protocol = "HTTP"
@@ -38,5 +38,16 @@ resource "aws_alb_listener" "WPlistener" {
       port        = var.container_port
       status_code = "HTTP_301"
     }
+   }
+}
+
+resource "aws_alb_listener" "Jellylistener" {
+  load_balancer_arn = "${aws_alb.ELBJellyfin.arn}"
+  port = var.container_port
+  protocol = "HTTP"
+
+  default_action {
+    type = "forward"
+    target_group_arn = aws_alb_target_group.TGJellyfin.arn
    }
 }

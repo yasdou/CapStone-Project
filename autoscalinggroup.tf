@@ -8,7 +8,7 @@ resource "aws_autoscaling_group" "ASJellyfin" {
   vpc_zone_identifier  = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
   target_group_arns    = [aws_alb_target_group.TGJellyfin.arn]
   depends_on = [
-    aws_s3_bucket_object.JellyfinFiles
+    aws_s3_object.JellyfinFiles
   ]
 }
 
@@ -75,7 +75,7 @@ resource "aws_launch_template" "launchtemplate" {
   iam_instance_profile {
     name = var.instance_profile
   }
-  user_data = base64encode(templatefile("${path.module}/start-JF.sh", local.vars))
+  user_data = base64encode(templatefile("${path.module}/scripts/start-JF.sh", local.vars))
   monitoring {
     enabled = true
   }
