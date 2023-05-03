@@ -23,7 +23,7 @@ variable "enable_dns_hostnames" {
     default = true
 }
 variable "VPC_Name" {
-    default = "Wordpress_VPC"
+    default = "Jellyfin_VPC"
 }
 
 
@@ -37,15 +37,19 @@ variable "ami_id" {
     default = "ami-0ac64ad8517166fb1"
 }
 variable "instance_type" {
-    default = "t3.micro"
+    default = "t2.micro"
 }
 variable "ami_key_pair_name" {
-    default = "vockey"
+    default = "vokey"
+}
+variable "instance_profile" {
+    default = "EC2_Admin"
 }
 variable "container_port" {
   description = "Which Ports do you need to be exposed for your containers?"
   default = 8096
 }
+
 
 ##################
 # Var local prov #
@@ -53,9 +57,11 @@ variable "container_port" {
 locals {
   vars = {
   #  rdsendpoint = aws_rds_cluster.RDSWP.endpoint
+    s3bucketname = aws_s3_bucket.s3bucket.bucket
     DBName = var.DBName
     DBPassword = var.DBPassword
     DBUser = var.DBUser
+    container_port = var.container_port
   #  efs_dns_name = aws_efs_file_system.WPfilesystem.dns_name
   }
 }
@@ -174,4 +180,12 @@ variable "cidr_db_privat1" {
 variable "cidr_db_privat2" {
   description = "Specify CIDR Range for database private subnet 2"
   default = "10.0.6.0/24"
+}
+
+##################
+### s3 Bucket ####
+##################
+
+variable "s3bucketname" {
+  default = "jellybelly"
 }

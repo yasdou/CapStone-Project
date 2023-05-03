@@ -1,5 +1,5 @@
 resource "aws_subnet" "private_subnet_1" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   cidr_block = var.cidr_privat1
   availability_zone = "us-west-2a"
   tags = {
@@ -8,7 +8,7 @@ resource "aws_subnet" "private_subnet_1" {
 }
 
 resource "aws_subnet" "private_subnet_2" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   cidr_block = var.cidr_privat2
   availability_zone = "us-west-2b"
   tags = {
@@ -18,7 +18,7 @@ resource "aws_subnet" "private_subnet_2" {
 
 # Create a public subnet for the bastion host
 resource "aws_subnet" "public_subnet_1" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   availability_zone = "us-west-2a"
   cidr_block = var.cidr_public1
   tags = {
@@ -28,7 +28,7 @@ resource "aws_subnet" "public_subnet_1" {
 
 # Create a second public subnet 
 resource "aws_subnet" "public_subnet_2" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   cidr_block = var.cidr_public2
   availability_zone = "us-west-2b"
   tags = {
@@ -37,7 +37,7 @@ resource "aws_subnet" "public_subnet_2" {
 }
 
 resource "aws_subnet" "private_database_subnet_1" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   cidr_block = var.cidr_db_privat1
   availability_zone = "us-west-2a"
   tags = {
@@ -46,7 +46,7 @@ resource "aws_subnet" "private_database_subnet_1" {
 }
 
 resource "aws_subnet" "private_database_subnet_2" {
-  vpc_id     = aws_vpc.WPvpc.id
+  vpc_id     = aws_vpc.JellyfinVPC.id
   cidr_block = var.cidr_db_privat2
   availability_zone = "us-west-2b"
   tags = {

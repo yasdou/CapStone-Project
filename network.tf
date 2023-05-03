@@ -1,5 +1,5 @@
 # Create a VPC with Internet Gateway
-resource "aws_vpc" "WPvpc" {
+resource "aws_vpc" "JellyfinVPC" {
     cidr_block = var.VPC_CIDR
     enable_dns_support = var.enable_dns_support
     enable_dns_hostnames = var.enable_dns_hostnames
@@ -15,12 +15,12 @@ resource "aws_internet_gateway" "igw" {
 }
 resource "aws_internet_gateway_attachment" "igwattachment" {
   internet_gateway_id = aws_internet_gateway.igw.id
-  vpc_id              = aws_vpc.WPvpc.id
+  vpc_id              = aws_vpc.JellyfinVPC.id
 }
 
 # Create a route table for the public subnet
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.WPvpc.id
+  vpc_id = aws_vpc.JellyfinVPC.id
 
   # Create a route to the internet gateway
   route {
@@ -63,7 +63,7 @@ resource "aws_nat_gateway" "privateinstanceNAT" {
 
 # Create a route table for the private subnet
 resource "aws_route_table" "private_rt" {
-  vpc_id = aws_vpc.WPvpc.id
+  vpc_id = aws_vpc.JellyfinVPC.id
 
   # Create a route to the NAT gateway
   route {
@@ -89,7 +89,7 @@ resource "aws_route_table_association" "nat_gateway_2" {
 
 # Create a route table for the database subnet
 resource "aws_route_table" "database_rt" {
-  vpc_id = aws_vpc.WPvpc.id
+  vpc_id = aws_vpc.JellyfinVPC.id
 
   tags = {
     Name = "database-rt"

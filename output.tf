@@ -8,7 +8,7 @@ output "bastion_ip_addr" {
 #}
 
 output "ELB_DNS" {
-    value = aws_alb.WPelb.dns_name
+    value = aws_alb.ELBJellyfin.dns_name
 }
 
 output "DB_Username" {
@@ -37,7 +37,7 @@ This file is automatically created after each terraform run. You can refer to th
 This file was created on ${formatdate("DD.MM.YY", timestamp())}.
 Bastion IP Address: ${aws_instance.bastion_host.public_ip}
 RDS Endpoint: {aws_rds_cluster.RDSWP.endpoint}
-ELB DNS: ${aws_alb.WPelb.dns_name}
+ELB DNS: ${aws_alb.ELBJellyfin.dns_name}
 DB Username: ${var.DBUser}
 DB Name: ${var.DBName}
 DB Password: <sensitive>

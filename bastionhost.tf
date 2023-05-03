@@ -6,7 +6,7 @@ data "http" "myip" {
 
 # Create a new security group for the bastion host
 resource "aws_security_group" "bastion_sg" {
-  vpc_id      = aws_vpc.WPvpc.id
+  vpc_id      = aws_vpc.JellyfinVPC.id
 
   ingress {
     from_port   = 22
@@ -32,13 +32,10 @@ resource "aws_instance" "bastion_host" {
   instance_type = var.instance_type
   key_name      = var.ami_key_pair_name
   subnet_id     = aws_subnet.public_subnet_1.id
-  iam_instance_profile = "LabInstanceProfile"
   vpc_security_group_ids = [aws_security_group.bastion_sg.id]
-
   tags = {
     Name = "bastion-host"
   }
-
   # Associate a public IP address with the instance
   associate_public_ip_address = true
 }

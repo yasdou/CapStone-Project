@@ -26,7 +26,7 @@ sudo make install
 
 #install plugin for s3 
 docker plugin install rexray/s3fs:0.11.4 S3FS_REGION=us-west-2 S3FS_OPTIONS="allow_other,iam_role=auto,umask=000" --grant-all-permissions
-docker volume create --driver rexray/s3fs:0.11.4 jellybelly1
+docker volume create --driver rexray/s3fs:0.11.4 ${s3bucketname}
 
 #run container
-sudo docker run -d  --name jellyfin -v jellybelly1:/config -v jellybelly1:/cache -v jellybelly1:/media --restart=unless-stopped  -p 8096:8096 jellyfin/jellyfin
+sudo docker run -d  --name jellyfin -v ${s3bucketname}:/config -v ${s3bucketname}:/cache -v ${s3bucketname}:/media --restart=unless-stopped  -p ${container_port}:${container_port} jellyfin/jellyfin
