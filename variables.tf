@@ -40,10 +40,10 @@ variable "instance_type" {
     default = "t2.micro"
 }
 variable "ami_key_pair_name" {
-    default = "vokey"
+    default = "vockey"
 }
 variable "instance_profile" {
-    default = "EC2_Admin"
+    default = "LabInstanceProfile"
 }
 variable "container_port" {
   description = "Which Ports do you need to be exposed for your containers?"
@@ -57,7 +57,7 @@ variable "container_port" {
 locals {
   vars = {
   #  rdsendpoint = aws_rds_cluster.RDSWP.endpoint
-    s3bucketname = aws_s3_bucket.s3bucket.bucket
+  #  s3bucketname = aws_s3_bucket.s3bucket.bucket
     DBName = var.DBName
     DBPassword = var.DBPassword
     DBUser = var.DBUser
@@ -187,9 +187,9 @@ variable "cidr_db_privat2" {
 ##################
 # you have to change these values manually in the backup.py script
 variable "s3bucketname" {
-  default = "jellybelly"
+  default = "jellybelly1"
 }
 
 variable "s3backupbucketname" {
-  default = "jellybellybackup"
+  default = "jellybellybackup1"
 }

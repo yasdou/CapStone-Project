@@ -11,4 +11,6 @@ The Backend will be hosted on AWS. To learn more about that have a look at our i
 noch hinzufügen: 
 - lambda backup funktion einfügen in diagramm
 - backup s3 einfügen in diagramm
-- 
+- add lambda schedule to diagram
+- s3 gateway abbilden evtl
+- check security groups

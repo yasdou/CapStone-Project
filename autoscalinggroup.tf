@@ -7,9 +7,9 @@ resource "aws_autoscaling_group" "ASJellyfin" {
   }
   vpc_zone_identifier  = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
   target_group_arns    = [aws_alb_target_group.TGJellyfin.arn]
-  depends_on = [
-    aws_s3_object.JellyfinFiles
-  ]
+  # depends_on = [
+  #   aws_s3_object.JellyfinFiles
+  # ]
 }
 
 # scale up alarm
