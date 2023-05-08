@@ -19,6 +19,9 @@
 # ami_id = ""
 # instance_type = ""
 # ami_key_pair_name = ""
+# instance_profile =
+# container_port =
+useremail = "yassindou+aws@gmail.com"
 
 # ##################
 # #### Database ####
@@ -62,3 +65,10 @@
 # cidr_public2 = ""
 # cidr_db_privat1 = ""
 # cidr_db_privat2 = ""
+
+##################
+### s3 Bucket ####
+##################
+
+# s3bucketname = ""
+# s3backupbucketname = ""

@@ -49,6 +49,9 @@ variable "container_port" {
   description = "Which Ports do you need to be exposed for your containers?"
   default = 8096
 }
+variable "useremail" {
+  description = "Whats the Email you want to get the Auto Scaling Notifications to?"
+}
 
 
 ##################

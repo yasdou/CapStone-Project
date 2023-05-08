@@ -1,4 +1,5 @@
 resource "aws_autoscaling_group" "ASJellyfin" {
+  name = "JellyfinAutoScalingGroup"
   min_size             = var.asg_min
   max_size             = var.asg_max
   desired_capacity     = var.asg_desired
@@ -67,7 +68,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu-alarm-scaledown" {
 
 # Launch Template Resource
 resource "aws_launch_template" "launchtemplate" {
-  name = "JellyfinServer"
+  name_prefix = "JellyfinServer"
   image_id = var.ami_id
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.SGServer.id]
@@ -85,4 +86,31 @@ resource "aws_launch_template" "launchtemplate" {
       Name = "JellyfinLaunchtemplate"
     }
   }
+}
+
+#notifications for whenver autoscaling group scales up or down
+
+resource "aws_autoscaling_notification" "jellyfin_notifications" {
+  group_names = [
+    aws_autoscaling_group.ASJellyfin.name,
+  ]
+
+  notifications = [
+    "autoscaling:EC2_INSTANCE_LAUNCH",
+    "autoscaling:EC2_INSTANCE_TERMINATE",
+    "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
+    "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
+  ]
+
+  topic_arn = aws_sns_topic.SNSJellyfin.arn
+}
+
+resource "aws_sns_topic" "SNSJellyfin" {
+  name = "SNSJellyfin"
+}
+
+resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
+  topic_arn = aws_sns_topic.SNSJellyfin.arn
+  protocol  = "email"
+  endpoint  = var.useremail
 }
