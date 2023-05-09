@@ -21,7 +21,7 @@
 # ami_key_pair_name = ""
 # instance_profile =
 # container_port =
-useremail = "yassindou+aws@gmail.com"
+# useremail = ""
 
 # ##################
 # #### Database ####

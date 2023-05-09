@@ -9,8 +9,10 @@ The Backend will be hosted on AWS. To learn more about that have a look at our i
 ![](images/capstone_diagram.svg)
 
 noch hinzufügen: 
-- lambda backup funktion einfügen in diagramm
-- backup s3 einfügen in diagramm
-- add lambda schedule to diagram
+- lambda backup funktion einfügen in diagramm done
+- backup s3 einfügen in diagramm done
+- add lambda schedule to diagram done
 - s3 gateway abbilden evtl
 - check security groups
+- health checks
+- sns zu diagram hinzufügen?
