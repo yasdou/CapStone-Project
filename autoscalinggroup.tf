@@ -100,7 +100,7 @@ resource "aws_autoscaling_notification" "jellyfin_notifications" {
     "autoscaling:EC2_INSTANCE_TERMINATE_ERROR",
   ]
 
-  topic_arn = aws_snsgit_topic.SNSJellyfin.arn
+  topic_arn = aws_sns_topic.SNSJellyfin.arn
 }
 
 resource "aws_sns_topic" "SNSJellyfin" {
