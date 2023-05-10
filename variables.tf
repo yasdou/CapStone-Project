@@ -22,9 +22,6 @@ variable "enable_dns_support" {
 variable "enable_dns_hostnames" {
     default = true
 }
-variable "VPC_Name" {
-    default = "Jellyfin_VPC"
-}
 
 
 

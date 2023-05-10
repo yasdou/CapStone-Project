@@ -4,13 +4,13 @@ resource "aws_vpc" "JellyfinVPC" {
     enable_dns_support = var.enable_dns_support
     enable_dns_hostnames = var.enable_dns_hostnames
     tags = {
-    Name = var.VPC_Name
+    Name = "VPC-${var.name}"
     }
 }
 
 resource "aws_internet_gateway" "igw" {
   tags = {
-    Name = "igw"
+    Name = "IGW-${var.name}"
   }
 }
 resource "aws_internet_gateway_attachment" "igwattachment" {
@@ -29,7 +29,7 @@ resource "aws_route_table" "public_rt" {
   }
 
   tags = {
-    Name = "public-rt"
+    Name = "public-rt-${var.name}"
   }
 }
 
@@ -53,7 +53,7 @@ resource "aws_nat_gateway" "privateinstanceNAT" {
   subnet_id     = aws_subnet.public_subnet_1.id
 
   tags = {
-    Name = "WP NAT"
+    Name = "NAT-${var.name}"
   }
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
@@ -72,7 +72,7 @@ resource "aws_route_table" "private_rt" {
   }
 
   tags = {
-    Name = "private-rt"
+    Name = "private-rt-${var.name}"
   }
 }
 
@@ -92,6 +92,6 @@ resource "aws_route_table" "database_rt" {
   vpc_id = aws_vpc.JellyfinVPC.id
 
   tags = {
-    Name = "database-rt"
+    Name = "database-rt-${var.name}"
   }
 }
