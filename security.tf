@@ -1,5 +1,5 @@
 //security.tf
-resource "aws_security_group" "WordpressELBSG" {
+resource "aws_security_group" "JellyfinELBSG" {
     name   = "${var.name}-sg-ELB"
     vpc_id = "${aws_vpc.JellyfinVPC.id}"
     

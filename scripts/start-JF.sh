@@ -6,6 +6,55 @@ sudo yum update -y
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
 sudo systemctl start amazon-ssm-agent
 
+# Install nginx
+sudo amazon-linux-extras install nginx1 -y
+
+# Create nginx server block for Jellyfin
+sudo mkdir /etc/nginx/sites-available
+sudo cat <<EOF > /etc/nginx/sites-available/jellyfin.conf
+server {
+    listen 80;
+    server_name ec2; # replace with your domain name
+
+    location / {
+        proxy_pass http://localhost:8096;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto http;
+        proxy_redirect off;
+    }
+
+    location /healthcheck.html {
+        root /var/www/html; # replace with the directory where healthcheck.html is located
+    }
+}
+EOF
+
+sudo mkdir /var/www /var/www/html/
+sudo cat <<EOF > /var/www/html/healthcheck.html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Health Check</title>
+  </head>
+  <body>
+    <p>OK</p>
+  </body>
+</html>
+EOF
+
+# Enable the new nginx server blocks
+sudo mkdir /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/jellyfin.conf /etc/nginx/sites-enabled/
+
+# Test the nginx configuration
+sudo nginx -t
+
+# Restart nginx
+sudo systemctl restart nginx
+
+
 #install docker
 
 sudo yum install docker -y

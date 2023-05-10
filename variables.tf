@@ -40,10 +40,10 @@ variable "instance_type" {
     default = "t2.micro"
 }
 variable "ami_key_pair_name" {
-    default = "vockey"
+    default = "vokey"
 }
 variable "instance_profile" {
-    default = "LabInstanceProfile"
+    default = "EC2_Admin"
 }
 variable "container_port" {
   description = "Which Ports do you need to be exposed for your containers?"
@@ -65,6 +65,7 @@ locals {
     DBPassword = var.DBPassword
     DBUser = var.DBUser
     container_port = var.container_port
+    elb =  aws_alb.ELBJellyfin.dns_name
   #  efs_dns_name = aws_efs_file_system.WPfilesystem.dns_name
   }
 }

@@ -2,7 +2,7 @@ resource "aws_alb" "ELBJellyfin" {
   name               = "ELBJellyfin"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.WordpressELBSG.id]
+  security_groups    = [aws_security_group.JellyfinELBSG.id]
   subnets            = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
 }
 
@@ -21,29 +21,14 @@ resource "aws_alb_target_group" "TGJellyfin" {
     unhealthy_threshold = 2
     timeout = 2
     interval = 5
-    matcher = "404"  # has to be HTTP 404 or fails
+    matcher = "200"  # has to be HTTP 404 or fails
   }
 
 }
 
-#create ALB listener for WP Servers
-resource "aws_alb_listener" "HTTPlistener" {
-  load_balancer_arn = "${aws_alb.ELBJellyfin.arn}"
-  port = 80
-  protocol = "HTTP"
-
-  default_action {
-    type = "redirect"
-    redirect {
-      port        = var.container_port
-      status_code = "HTTP_301"
-    }
-   }
-}
-
 resource "aws_alb_listener" "Jellylistener" {
   load_balancer_arn = "${aws_alb.ELBJellyfin.arn}"
-  port = var.container_port
+  port = 80
   protocol = "HTTP"
 
   default_action {
