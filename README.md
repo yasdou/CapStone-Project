@@ -7,12 +7,3 @@ The idea is to offer a possibilty of streaming movies and shows of smaller and i
 The Backend will be hosted on AWS. To learn more about that have a look at our infrastructure diagram:
 
 ![](images/capstone_diagram.svg)
-
-noch hinzufügen: 
-- lambda backup funktion einfügen in diagramm done
-- backup s3 einfügen in diagramm done
-- add lambda schedule to diagram done
-- s3 gateway abbilden evtl
-- check security groups
-- health checks
-- sns zu diagram hinzufügen?
